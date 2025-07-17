@@ -5,30 +5,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Stock</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>@social</td>
+                <tr v-for="(data, index) of products" :key="'index-product-' + index">
+                    <td>{{ data.name }}</td>
+                    <td>{{ formatRupiah(data.price) }}</td>
+                    <td>{{ data.stock }}</td>
                 </tr>
             </tbody>
         </table>
@@ -36,11 +22,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-    setup() {
+    data() {
+        return {
+            products: []
+        }
+    },
 
+    mounted() {
+        this.getProduct();
+    },
 
-        return {}
+    methods: {
+        async getProduct() {
+            const res = await axios.get("http://localhost:3000/api/products");
+            this.products = res.data.data;
+        },
+
+        formatRupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR"
+            }).format(number);
+        }
     }
 }
 </script>
