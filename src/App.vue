@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import HomePage from './pages/HomePage.vue';
 
 </script>
@@ -7,4 +7,12 @@ import HomePage from './pages/HomePage.vue';
   <div>
     <HomePage />
   </div>
+</template> -->
+
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router'
+</script>
+
+<template>
+  <RouterView />
 </template>

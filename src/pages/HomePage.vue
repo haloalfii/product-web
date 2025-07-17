@@ -2,6 +2,8 @@
     <div class="container my-5">
         <h1>Product List</h1>
 
+        <RouterLink class="btn btn-primary my-3" to="/create">Add Product</RouterLink>
+
         <table class="table">
             <thead>
                 <tr>
@@ -23,6 +25,7 @@
 
 <script>
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
     data() {
